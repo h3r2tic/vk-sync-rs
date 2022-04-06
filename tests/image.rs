@@ -1,6 +1,7 @@
 //! Tests are based on the common synchronization examples on the Vulkan-Docs wiki: https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples.
 
 use ash::vk;
+use vk_sync_fork as vk_sync;
 
 #[test]
 fn compute_write_storage_fragment_read_sampled() {
@@ -359,7 +360,10 @@ fn graphics_read_sampled_graphics_write_color() {
     assert_eq!(src_mask, vk::PipelineStageFlags::FRAGMENT_SHADER);
     assert_eq!(dst_mask, vk::PipelineStageFlags::COLOR_ATTACHMENT_OUTPUT);
     assert_eq!(barrier.src_access_mask, vk::AccessFlags::empty());
-    assert_eq!(barrier.dst_access_mask, vk::AccessFlags::empty());
+    assert_eq!(
+        barrier.dst_access_mask,
+        vk::AccessFlags::COLOR_ATTACHMENT_WRITE
+    );
     assert_eq!(
         barrier.old_layout,
         vk::ImageLayout::SHADER_READ_ONLY_OPTIMAL

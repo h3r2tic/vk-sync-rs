@@ -1,6 +1,7 @@
 //! Tests are based on the common synchronization examples on the Vulkan-Docs wiki: https://github.com/KhronosGroup/Vulkan-Docs/wiki/Synchronization-Examples.
 
 use ash::vk;
+use vk_sync_fork as vk_sync;
 
 #[test]
 fn compute_write_storage_compute_read_storage() {
